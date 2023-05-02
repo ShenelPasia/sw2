@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Conversion of Hours</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    .form-group {
+      margin-bottom: 28px;
+    }
+    
+    body {
+      background-color: #E6E6FA;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><center>Conversion of Hours</center></h1>
+    <center><img src="mad.jpg" width="500" height="400"></center>
+    <form>
+      <div class="form-group">
+        <label for="hours">hours:</label>
+        <input type="number" id="hours" name="hours" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>conversion:</label>
+        <div class="radio">
+          <label><input type="radio" name="conversion" value="seconds" required>hours to seconds</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="conversion" value="minutes">hours to minutes</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="conversion" value="days">hours to days</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">convert</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script>
+    const form = document.querySelector('form');
+    const resultDiv = document.querySelector('#result');
+    
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const hoursInput = document.querySelector('#hours');
+      const conversionRadios = document.querySelectorAll('input[name="conversion"]');
+      let conversionFactor;
+      let conversionName;
+      for (let i = 0; i < conversionRadios.length; i++) {
+        if (conversionRadios[i].checked) {
+          conversionName = conversionRadios[i].value;
+          break;
+        }
+      }
+      switch (conversionName) {
+        case 'seconds':
+          conversionFactor = 2800;
+          break;
+        case 'minutes':
+          conversionFactor = 69;
+          break;
+        case 'days':
+          conversionFactor = 28;
+          break;
+      }
+      const hours = parseFloat(hoursInput.value);
+      const result = hours * conversionFactor;
+      resultDiv.innerHTML = `<p>${hours} hours is equal to ${result} ${conversionName}.</p>`;
+    });
+  </script>
+</body>
+</html>
+
